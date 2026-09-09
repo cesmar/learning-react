@@ -1,4 +1,3 @@
-// snippet: rafc
 import { useEffect, useState, type KeyboardEvent } from "react";
 
 interface Props {
@@ -10,15 +9,11 @@ export const SearchBar = ({ placeholder = "Buscar", onQuery }: Props) => {
   const [query, setQuery] = useState("");
 
   useEffect(() => {
-    // // console.log("Hola desde el efecto");
-    // onQuery(query);
-
     const timeoutId = setTimeout(() => {
       onQuery(query);
     }, 700);
 
     return () => {
-      // console.log("Función de limpieza");
       clearTimeout(timeoutId);
     };
   }, [query, onQuery]);
@@ -36,17 +31,11 @@ export const SearchBar = ({ placeholder = "Buscar", onQuery }: Props) => {
 
   return (
     <div className="search-container">
-      {/* <h1>{query}</h1> */}
       <input
         type="text"
         placeholder={placeholder}
         value={query}
         onChange={(event) => setQuery(event.target.value)}
-        // onKeyDown={(event) => {
-        //   if (event.key === "Enter") {
-        //     handleSearch();
-        //   }
-        // }}
         onKeyDown={handleKeyDown}
       />
       <button onClick={handleSearch}>Buscar</button>
