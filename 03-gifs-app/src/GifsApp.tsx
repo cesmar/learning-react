@@ -1,53 +1,56 @@
+import { useState } from "react";
+
 import { GifList } from "./gifs/components/GifList";
 import { PreviousSearches } from "./gifs/components/PreviousSearches";
-import { mockGifs, type Gif } from "./mock-data/gifs.mock";
+
 import { CustomHeader } from "./shared/components/CustomHeader";
 import { SearchBar } from "./shared/components/SearchBar";
 
+import { getGifsByQuery } from "./gifs/actions/get-gifs-by-query.action";
+import type { Gif } from "./gifs/interfaces/gif.interface";
+
 export const GifsApp = () => {
+  const [gifs, setGifs] = useState<Gif[]>([]);
+
+  //snippet: usesta
+  const [previousTerms, setpreviousTerms] = useState<string[]>([]); //"dragon ball z", "goku"
+
+  const handleTermClicked = (term: string) => {
+    console.log({ term });
+  };
+
+  const handleSearch = async (query: string = "") => {
+    query = query.toLowerCase().trim();
+
+    if (query.length === 0) return;
+    if (previousTerms.includes(query)) return;
+
+    setpreviousTerms([query, ...previousTerms].splice(0, 8));
+
+    const gifs = await getGifsByQuery(query);
+    setGifs(gifs);
+  };
+
   return (
     <>
       {/* Header */}
-      {/* <div className="content-center">
-        <h1>Buscador de Gifs</h1>
-        <p>Descubre y comparte el gif perfecto</p>
-      </div> */}
       <CustomHeader
         title="Buscador de Gifs"
         description="Descubre y comparte el gif perfecto"
       />
 
       {/* Search */}
-      {/* <div className="search-container">
-        <input type="text" placeholder="Buscar gifs" />
-        <button>Buscar</button>
-      </div> */}
-      <SearchBar placeholder="Busca lo que quieras" />
+      <SearchBar placeholder="Busca lo que quieras" onQuery={handleSearch} />
 
       {/* Búsquedas previas */}
-      {/* <div className="previous-searches">
-        <h2>Búsquedas previas</h2>
-        <ul className="previous-searches-list">
-          <li>Goku</li>
-          <li>Saitama</li>
-          <li>Elder Ring</li>
-        </ul>
-      </div> */}
-      <PreviousSearches searches={['Goku', 'Dragon Ball Z', 'Luffy']} />
+      <PreviousSearches
+        searches={previousTerms}
+        // onLabelClicked={(term: string) => handleTermClicked(term)}
+        onLabelClicked={handleTermClicked}
+      />
 
       {/* Gifs */}
-      {/* <div className="gifs-container">
-        {mockGifs.map((gif: Gif) => (
-          <div key={gif.id} className="gif-card">
-            <img src={gif.url} alt={gif.title} />
-            <h3>{gif.title}</h3>
-            <p>
-              {gif.width}x{gif.height} (1.5mb)
-            </p>
-          </div>
-        ))}
-      </div> */}
-      <GifList gifs={mockGifs} />
+      <GifList gifs={gifs} />
     </>
   );
 };
