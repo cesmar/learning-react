@@ -4,7 +4,6 @@ import { GifsApp } from "./GifsApp";
 
 describe("GifsApp", () => {
   test("should render component properly", () => {
-    //
     const { container } = render(<GifsApp />);
 
     expect(container).toMatchSnapshot();
