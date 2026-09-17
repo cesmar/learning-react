@@ -5,8 +5,6 @@ describe("giphyApi", () => {
   test("should be configured correctly", () => {
     const { params } = giphyApi.defaults;
     
-    // console.log(params);
-    // console.log("*** giphyApi:", giphyApi.defaults);
     expect(giphyApi.defaults.baseURL).toBe("https://api.giphy.com/v1/gifs/");
     expect(params.lang).toBe("es");
     expect(params.api_key).toBe(import.meta.env.VITE_GIPHY_API_KEY);

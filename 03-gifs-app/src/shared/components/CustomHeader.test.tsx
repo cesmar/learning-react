@@ -24,7 +24,6 @@ describe("CustomHeader", () => {
     const { container } = render(<CustomHeader title={title} />);
     screen.debug();
     // const p = container.querySelector("p");
-    // console.log("*** <p>: ", p?.innerHTML);
     // expect(p?.innerHTML).not.toBe;
 
     const divElement = container.querySelector(".content-center");

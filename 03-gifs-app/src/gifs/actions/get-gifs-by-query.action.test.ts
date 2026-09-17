@@ -10,34 +10,12 @@ describe("getGifsByQuery", () => {
   let mock = new AxiosMockAdapter(giphyApi);
 
   beforeEach(() => {
-    // mock.reset();
     mock = new AxiosMockAdapter(giphyApi);
   });
-
-  /*
-  test("should ", async () => {
-    const gifs = await getGifsByQuery("goku");
-    // console.log(gifs);
-    const [gif1] = gifs;
-    console.log(gif1);
-
-    expect(gifs.length).toBe(10);
-
-    expect(gif1).toStrictEqual({
-      id: expect.any(String),
-      title: expect.any(String),
-      url: expect.any(String),
-      width: expect.any(Number),
-      height: expect.any(Number),
-    });
-  });
-  */
 
   test("should return a list of gifs", async () => {
     mock.onGet("/search").reply(200, giphySearchResponseMock);
     const gifs = await getGifsByQuery("goku");
-
-    // console.log('**gifs: ', gifs);
 
     expect(gifs.length).toBe(10);
     gifs.forEach((gif) => {
@@ -50,11 +28,9 @@ describe("getGifsByQuery", () => {
   });
 
   test("should return an empty list of gifs if query is empty", async () => {
-    // mock.onGet("/search").reply(200, { data: [] });
     mock.restore();
 
     const gifs = await getGifsByQuery("");
-    // console.log(gifs);
 
     expect(gifs.length).toBe(0);
   });
@@ -73,7 +49,6 @@ describe("getGifsByQuery", () => {
     });
 
     const gifs = await getGifsByQuery("goku");
-    // console.log({ gifs });
 
     expect(gifs.length).toBe(0);
     expect(consoleErrorSpy).toHaveBeenCalled();

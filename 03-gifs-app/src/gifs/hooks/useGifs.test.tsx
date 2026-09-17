@@ -15,7 +15,6 @@ describe("useGifs", () => {
   });
 
   test("should return a list of gifs", async () => {
-    //handleSearch
     const { result } = renderHook(() => useGifs());
 
     await act(async () => {
@@ -89,7 +88,6 @@ describe("useGifs", () => {
       await result.current.handleSearch("goku9");
     });
 
-    // console.log(result.current.previousTerms);
     expect(result.current.previousTerms.length).toBe(8);
     expect(result.current.previousTerms).toStrictEqual([
       "goku9",

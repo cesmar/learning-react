@@ -1,7 +1,6 @@
 import { describe, expect, test, vi } from "vitest";
 import { fireEvent, render, screen } from "@testing-library/react";
 import { MyCounterApp } from "./MyCounterApp";
-// import { useCounter } from "../hooks/useCounter";
 
 const handleAddMock = vi.fn();
 const handleSubtractMock = vi.fn();
@@ -10,11 +9,8 @@ const handleResetMock = vi.fn();
 vi.mock("../hooks/useCounter", () => ({
   useCounter: () => ({
     counter: 25,
-    // handleAdd: vi.fn(),
     handleAdd: handleAddMock,
-    // handleSubtract: vi.fn(),
     handleSubtract: handleSubtractMock,
-    // handleReset: vi.fn(),
     handleReset: handleResetMock,
   }),
 }));
@@ -24,9 +20,6 @@ describe("MyCounterApp", () => {
     render(<MyCounterApp />);
     // screen.debug();
 
-    // expect(screen.getByRole("heading", { level: 1 }).innerHTML).toContain(
-    //   `Counter: 10`,
-    // );
     expect(screen.getByRole("heading", { level: 1 }).innerHTML).toContain(
       `Counter: 25`,
     );

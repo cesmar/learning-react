@@ -31,7 +31,6 @@ export const useGifs = () => {
     setGifs(gifs);
 
     gifsCache.current[query] = gifs;
-    // console.log({ gifsCache });
   };
 
   return {
