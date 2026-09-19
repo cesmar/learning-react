@@ -7,30 +7,59 @@ import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
+import type { Todo } from "./reducer/taskReducer";
+
+/*
 interface Todo {
   id: number;
   text: string;
   completed: boolean;
 }
+*/
 
 export const TasksApp = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
   const [inputValue, setInputValue] = useState("");
 
   const addTodo = () => {
-    console.log("Agregar tarea", inputValue);
+    if (inputValue.length === 0) return;
+    // console.log("Agregar tarea", inputValue);
+
+    const newTodo: Todo = {
+      id: Date.now(),
+      text: inputValue.trim(),
+      completed: false,
+    };
+    setTodos([...todos, newTodo]);
+    // setTodos((prev) => {
+    //   [...prev, newTodo];
+    // });
+    setInputValue("");
   };
 
   const toggleTodo = (id: number) => {
     console.log("Cambiar de true a false", id);
+    const updatedTodos = todos.map((todo) => {
+      if (todo.id === id) {
+        // todo.completed = !todo.completed;
+        return { ...todo, completed: !todo.completed };
+      }
+      return todo;
+    });
+    setTodos(updatedTodos);
   };
 
   const deleteTodo = (id: number) => {
-    console.log("Eliminar tarea", id);
+    // console.log("Eliminar tarea", id);
+    const updatedTodos = todos.filter((todo) => todo.id !== id);
+    // console.log({ newTodos: updatedTodos });
+    setTodos(updatedTodos);
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
-    console.log("Presiono enter");
+    // console.log("Presiono enter");
+    // console.log({ key: e.key });
+    if (e.key === "Enter") addTodo();
   };
 
   const completedCount = todos.filter((todo) => todo.completed).length;
