@@ -39,8 +39,6 @@ createRoot(document.getElementById("root")!).render(
         </div>
       }
     >
-      {/* <ClientInformation id={100} /> */}
-      {/* <ClientInformation /> */}
       <ClientInformation getUser={getUserAction(25)} />
     </Suspense>
   </StrictMode>,
