@@ -1,15 +1,24 @@
+import { useEffect, useState } from "react";
+
 import { CustomBreadcrumbs } from "@/components/custom/CustomBreadcrumbs";
 import { CustomJumbotron } from "@/components/custom/CustomJumbotron";
 import { CustomPagination } from "@/components/custom/CustomPagination";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+
+import { getHeroesByPage } from "@/heroes/actions/get-heroes-by-page.action";
 import { HeroGrid } from "@/heroes/components/HeroGrid";
 import { HeroStats } from "@/heroes/components/HeroStats";
-import { useState } from "react";
 
 export const HomePage = () => {
   const [activeTab, setActiveTab] = useState<
     "all" | "favorites" | "heroes" | "villains"
   >("all");
+
+  useEffect(() => {
+    getHeroesByPage().then((heroes) => {
+      // console.log({ heroes });
+    });
+  }, []);
 
   return (
     <>
