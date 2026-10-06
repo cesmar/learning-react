@@ -21,7 +21,6 @@ export const CustomMenu = () => {
         {/* Home */}
         <NavigationMenuItem>
           <NavigationMenuLink
-            // className="bg-slate-200 rounded-md p-2"
             className={cn(isActive("/") && "bg-slate-200", "rounded-md")}
             render={<Link to="/" />}
           >
