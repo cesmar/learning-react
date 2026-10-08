@@ -1,9 +1,27 @@
 import { heroApi } from "../api/hero.api";
+import type { HeroesResponse } from "../pages/types/get-heroes.response";
 
-export const getHeroesByPage = async () => {
-  const { data } = await heroApi.get("/");
+const BASE_URL = import.meta.env.VITE_API_URL;
 
-  console.log({ data });
+export const getHeroesByPageAction = async (
+  page: number,
+  limit: number = 6,
+): Promise<HeroesResponse> => {
+  if (isNaN(page)) {
+    page = 1;
+  }
+  const { data } = await heroApi.get<HeroesResponse>("/", {
+    params: {
+      limit: limit,
+      offset: (page - 1) * limit,
+    },
+  });
+  //   console.log({ data });
 
-  return data;
+  const heroes = data.heroes.map((hero) => ({
+    ...hero,
+    image: `${BASE_URL}/images/${hero.image}`,
+  }));
+
+  return { ...data, heroes: heroes };
 };

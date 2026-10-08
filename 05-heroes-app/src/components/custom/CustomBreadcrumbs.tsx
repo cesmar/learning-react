@@ -1,10 +1,10 @@
 import {
-    Breadcrumb,
-    BreadcrumbItem,
-    BreadcrumbLink,
-    BreadcrumbList,
-    BreadcrumbPage,
-    BreadcrumbSeparator,
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import { Link } from "react-router";
 
@@ -30,13 +30,13 @@ export const CustomBreadcrumbs = ({ currentPage, breadcrumbs }: Props) => {
         </BreadcrumbItem>
 
         {breadcrumbs?.map((crumb) => (
-          <div className="flex items-center">
-            <BreadcrumbItem>
-              {/* <BreadcrumbSeparator>
+          <div className="flex items-center" key={crumb.label}>
+            {/* <BreadcrumbSeparator>
                 <SlashIcon />
               </BreadcrumbSeparator>
               <BreadcrumbSeparator children={<SlashIcon />} /> */}
-              <BreadcrumbSeparator />
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>
               <BreadcrumbLink render={<Link to={crumb.to} />}>
                 {crumb.label}
               </BreadcrumbLink>
