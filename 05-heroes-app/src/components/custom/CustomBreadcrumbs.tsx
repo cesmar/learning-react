@@ -19,8 +19,6 @@ interface Props {
 }
 
 export const CustomBreadcrumbs = ({ currentPage, breadcrumbs }: Props) => {
-  //   const { pathname } = useLocation();
-
   return (
     <Breadcrumb className="my-5">
       <BreadcrumbList>
@@ -31,10 +29,6 @@ export const CustomBreadcrumbs = ({ currentPage, breadcrumbs }: Props) => {
 
         {breadcrumbs?.map((crumb) => (
           <div className="flex items-center" key={crumb.label}>
-            {/* <BreadcrumbSeparator>
-                <SlashIcon />
-              </BreadcrumbSeparator>
-              <BreadcrumbSeparator children={<SlashIcon />} /> */}
             <BreadcrumbSeparator />
             <BreadcrumbItem>
               <BreadcrumbLink render={<Link to={crumb.to} />}>
@@ -49,12 +43,6 @@ export const CustomBreadcrumbs = ({ currentPage, breadcrumbs }: Props) => {
         <BreadcrumbItem>
           <BreadcrumbPage>{currentPage}</BreadcrumbPage>
         </BreadcrumbItem>
-
-        {/* Otros */}
-        {/* <BreadcrumbItem>
-        <BreadcrumbSeparator />
-          <BreadcrumbPage>Breadcrumb</BreadcrumbPage>
-        </BreadcrumbItem> */}
       </BreadcrumbList>
     </Breadcrumb>
   );

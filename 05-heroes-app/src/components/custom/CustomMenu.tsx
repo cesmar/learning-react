@@ -16,7 +16,7 @@ export const CustomMenu = () => {
   };
 
   return (
-    <NavigationMenu>
+    <NavigationMenu className="py-5">
       <NavigationMenuList>
         {/* Home */}
         <NavigationMenuItem>
@@ -31,7 +31,6 @@ export const CustomMenu = () => {
         {/* Search */}
         <NavigationMenuItem>
           <NavigationMenuLink
-            // className="bg-slate-200 rounded-md p-2 ml-1"
             className={cn(isActive("/search") && "bg-slate-200", "rounded-md")}
             render={<Link to="/search" />}
           >
